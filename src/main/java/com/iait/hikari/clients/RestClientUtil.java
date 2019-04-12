@@ -1,5 +1,7 @@
 package com.iait.hikari.clients;
 
+import java.net.URI;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -37,7 +39,8 @@ public class RestClientUtil {
         objArticle.setTitle(title);
         objArticle.setCategory(category);
         HttpEntity<Article> requestEntity = new HttpEntity<>(objArticle, headers);
-        restTemplate.postForLocation(url, requestEntity);
+        URI location = restTemplate.postForLocation(url, requestEntity);
+        System.out.println(location);
     }
     
     public static void main(String args[]) {

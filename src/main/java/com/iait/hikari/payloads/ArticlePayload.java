@@ -2,15 +2,15 @@ package com.iait.hikari.payloads;
 
 import com.iait.hikari.enums.Category;
 
-public class ArticleResponse {
+public class ArticlePayload {
     
     private Long id;
     private String title;
     private Category category;
     
-    public ArticleResponse() {}
+    public ArticlePayload() {}
     
-    public ArticleResponse(Long id, String title, Category category) {
+    public ArticlePayload(Long id, String title, Category category) {
         super();
         this.id = id;
         this.title = title;

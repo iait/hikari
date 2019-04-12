@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iait.hikari.entities.Article;
-import com.iait.hikari.payloads.ArticleResponse;
+import com.iait.hikari.payloads.ArticlePayload;
 import com.iait.hikari.services.ArticleService;
 
 @RestController
@@ -24,10 +24,10 @@ public class ArticleCtrl {
     private ArticleService articleService;
     
     @GetMapping(path="articles")
-    public ResponseEntity<List<ArticleResponse>> getArticles() {
+    public ResponseEntity<List<ArticlePayload>> getArticles() {
         List<Article> articles = articleService.getAllArticles();
-        List<ArticleResponse> response = articles.stream().map(article -> {
-            ArticleResponse articleResponse = new ArticleResponse();
+        List<ArticlePayload> response = articles.stream().map(article -> {
+            ArticlePayload articleResponse = new ArticlePayload();
             articleResponse.setId(article.getId());
             articleResponse.setTitle(article.getTitle());
             articleResponse.setCategory(article.getCategory());
@@ -36,8 +36,8 @@ public class ArticleCtrl {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
-    @PostMapping(path="article")
-    public ResponseEntity<Void> addArticle(@RequestBody ArticleResponse request) {
+    @PostMapping(path="articles")
+    public ResponseEntity<Void> addArticle(@RequestBody ArticlePayload request) {
         articleService.addArticle(request.getTitle(), request.getCategory());
         return ResponseEntity.ok().build();
     }
